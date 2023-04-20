@@ -1,20 +1,24 @@
 package me.ikapkova.tests.model;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static me.ikapkova.tests.constants.TestConstants.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {
-
 
     User user = new User(CORRECT_LOGIN, CORRECT_EMAIL);
 
     @Test
+    @DisplayName("Проверка просмотра логина на корректность")
+    void testGetUserLogin() {
+        Assertions.assertEquals(CORRECT_LOGIN, user.getLogin());
+    }
+
+    @Test
     @DisplayName("Тест конструктора с двумя параметрами")
     void createUserTest() {
-        Assertions.assertNotNull(user);
+        assertNotNull(user);
     }
 
 
@@ -22,13 +26,13 @@ class UserTest {
     @DisplayName("Тест пустого конструктора")
     void testUserEmptyConstructor() {
         User user1 = new User();
-        Assertions.assertNull(user1.getLogin());
-        Assertions.assertNull(user1.getEmail());
+        assertNull(user1.getLogin());
+        assertNull(user1.getEmail());
     }
 
     @Test
     void checkCorrectMailTest() {
-        Assertions.assertDoesNotThrow(() -> new User(CORRECT_LOGIN, CORRECT_EMAIL));
+        assertDoesNotThrow(() -> new User(CORRECT_LOGIN, CORRECT_EMAIL));
     }
 
 
@@ -38,11 +42,7 @@ class UserTest {
         Assertions.assertNotEquals(user.getLogin(), user.getEmail());
     }
 
-    @Test
-    @DisplayName("Проверка просмотра логина на корректность")
-    void testGetUserLogin() {
-        Assertions.assertEquals("Ivan1976", user.getLogin());
-    }
+
 
     @Test
     @DisplayName("Проверка email на корректность при просмотре")
@@ -54,14 +54,14 @@ class UserTest {
    @Test
    @DisplayName("Проверка логина на корректность при изменении")
     void testSetUserLogin() {
-        Assertions.assertThrows(IllegalArgumentException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> user.setLogin(INVALID_LOGIN)
         );
     }
     @Test
     @DisplayName("Проверка email на корректность при изменении")
     void testSetUserEmailCorrect() {
-        Assertions.assertThrows(IllegalArgumentException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> user.setEmail(WRONG_EMAIL)
         );
     }
